@@ -59,6 +59,41 @@ nmap --script vulners -sV [--script-args mincvss=<arg_val>] <hostname|IP: target
 
 
 
+### Using  proxy with `proxychains`
+
+- Find proxychains config files
+
+  ```
+  locate proxychains
+  ```
+
+  The main config file is `/etc/proxychains.conf`
+
+- Edit config file to use socks5 proxy
+
+  Add proxy config after `[ProxyLst]`
+
+  ![image-20210301155946623](C:\Users\Lam Nguyen\AppData\Roaming\Typora\typora-user-images\image-20210301155946623.png)
+
+- Using proxychain with `nmap`
+
+  ```
+  proxychains namp ...
+  ```
+
+
+
+
+### Usages
+
+Update `vulners` script at  https://github.com/vulnersCom/nmap-vulners
+
+Common use for redteam /pentest
+
+```powershell
+proxychains nmap -T4 -v -sS -sC -Pn -p- -On <output file> <ip address range>
+```
+
 
 
 amass
