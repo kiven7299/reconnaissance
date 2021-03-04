@@ -80,8 +80,22 @@ nmap --script vulners -sV [--script-args mincvss=<arg_val>] <hostname|IP: target
   ```
   proxychains namp ...
   ```
-
-
+  
+  - Fix bug:
+  
+    ```
+    yeah, nmap has some stupid (superfluous) code in it that tries to determine which network interface to use to send out packets, even if the user uses tcp options, so it could just unconditionally connect() and leave the decision to the OS.
+    please file a bug against nmap.
+    in the meantime there exist 3 options to workaround it on the proxychains side:
+    
+        1. do not use a dns name, but a raw ipv4 address
+        2. or disable proxy_dns in the config
+        3. or do not use proxychains at all but nmap's integrated options to use a SOCKS proxy.
+    ```
+  
+    
+  
+  
 
 
 ### Usages
@@ -91,7 +105,7 @@ Update `vulners` script at  https://github.com/vulnersCom/nmap-vulners
 Common use for redteam /pentest
 
 ```powershell
-proxychains nmap -T4 -v -sS -sC -Pn -p- -On <output file> <ip address range>
+proxychains nmap -T4 -v -sS -sC -p- -oN <output file> <ip address range>
 ```
 
 
