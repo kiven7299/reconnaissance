@@ -35,11 +35,12 @@ Create new `.sh` file:
 ```sh
 #!/bin/bash
 domain="$1"
+echo "Reccon $domain"
 mkdir -p $domain
 echo "------- AMASS ---------"
 echo "Find add subdomains"
-amass enum -active -dir "$domain" -src -ip -o amass-results -d $domain
-cat "$doamin/amass-results" | cut -d']' -f 2 | awk '{print $1}' | sort -u > "$domain/hosts-amass"
+amass enum -active -src -ip -o "$domain/amass-results" -d $domain
+cat "$domain/amass-results" | cut -d']' -f 2 | awk '{print $1}' | sort -u > "$domain/hosts-amass"
 echo 
 echo "------- HTTPx ---------\n"
 echo "HTTP probe to check if domain is active (remove result returning 404, 400)"
