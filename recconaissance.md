@@ -38,7 +38,7 @@ domain="$1"
 echo "Reccon $domain"
 mkdir -p $domain
 echo "------- AMASS ---------"
-echo "Find add subdomains"
+echo "Find all subdomains"
 amass enum -active -src -ip -o "$domain/amass-results" -d $domain
 cat "$domain/amass-results" | cut -d']' -f 2 | awk '{print $1}' | sort -u > "$domain/hosts-amass"
 echo 
