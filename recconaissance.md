@@ -44,7 +44,7 @@ cat "$domain/amass-results" | cut -d']' -f 2 | awk '{print $1}' | sort -u > "$do
 echo 
 echo "------- HTTPx ---------\n"
 echo "HTTP probe to check if domain is active (remove result returning 404, 400)"
-cat "$domain/hosts-amass" | httpx -follow-redirects -ip -ports 80,443,8080,8081 -web-server -status-code -fc 400,404 -title -method -o -x ALL "$domain/httpx-hosts" 
+cat "$domain/hosts-amass" | httpx -follow-redirects -ip -ports 80,443,8080,8081 -web-server -status-code -fc 400,404 -title -method -x ALL -o "$domain/httpx-hosts" 
 ```
 
 
