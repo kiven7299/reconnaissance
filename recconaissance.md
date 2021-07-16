@@ -127,3 +127,12 @@ amass track -- Track differences between enumerations
 
 amass db -- Manipulate the Amass graph database
 	
+
+# dirsearch
+
+common use
+
+```powershell
+python dirsearch.py --header="Cookie: ..." -e sql,gz,bak,bk,php,txt,html,xml,asp,aspx,cgi,phtml,jsp,zip,rar,7z -r -R 3 --random-agents -b -t 5
+```
+
