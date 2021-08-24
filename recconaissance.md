@@ -125,11 +125,11 @@ amass enum -- Perform enumerations and network mapping
 common: amass enum --active -dir <output dir> -o <output filename> -d <main domain name>
 ```
 
-amass viz -- Visualize enumeration results
+amass viz -- Visualize enumeration results.
 
-amass track -- Track differences between enumerations
+amass track -- Track differences between enumerations.
 
-amass db -- Manipulate the Amass graph database
+amass db -- Manipulate the Amass graph database.
 	
 
 # dirsearch
