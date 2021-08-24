@@ -74,7 +74,11 @@ nmap --script vulners -sV [--script-args mincvss=<arg_val>] <hostname|IP: target
 
   Add proxy config after `[ProxyLst]`
 
-  ![image-20210301155946623](C:\Users\Lam Nguyen\AppData\Roaming\Typora\typora-user-images\image-20210301155946623.png)
+  ```
+  [ProxyList]
+  #socks5 proxy
+  socks5 127.0.0.1 8888
+  ```
 
 - Using proxychain with `nmap`
 
