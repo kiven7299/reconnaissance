@@ -137,6 +137,6 @@ amass db -- Manipulate the Amass graph database.
 common use
 
 ```powershell
-python dirsearch.py --header="Cookie: ..." -e sql,gz,bak,bk,php,txt,html,xml,asp,aspx,cgi,phtml,jsp,zip,rar,7z -r -R 3 --random-agents -b -t 5
+python dirsearch.py --header="Cookie: ..." -e sql,gz,bak,bk,php,txt,html,xml,asp,aspx,cgi,phtml,jsp,zip,rar,7z -r -R 3 --random-agents -b -t 5 --exclude-status=404,400
 ```
 
