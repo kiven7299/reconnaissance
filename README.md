@@ -198,3 +198,28 @@ The JFScan (Just Fu*king Scan) is a wrapper around a super-fast port scanner [**
 - Fully supports IPv6.
 - Supports scope control, only targets defined in scope will be scanned.
 
+### common usage
+
+```
+jfscan --targets targets --top-port 1000 --nmap --nmap-options="-sV" 
+```
+
+
+
+# Nuclei
+
+```
+nuclei [-l {path to file} | -u  -proxy {http or socks} -t {template}
+```
+
+- `-l, -list string`    path to file containing a list of target URLs/hosts to scan (one per line)
+
+- `-t, -templates string[]`     list of template or template directory to run (comma-separated, file). Template is a `.yaml` file. Two ways to specify template:
+  - Relative path from https://github.com/projectdiscovery/nuclei-templates. For example: if we want to use template https://github.com/projectdiscovery/nuclei-templates/blob/2407b5777998e73192f0eda23cbbedc2afe1d58f/vulnerabilities/wordpress/wp-revslider-file-download.yaml, the option would be`-t "vulnerabilities/wordpress/wp-revslider-file-download.yaml"`
+  - Local file path
+
+
+
+Search templates in https://nuclei-templates.netlify.app/
+
+![image-20220627163910703](D:\Tools\Stuff\reconnaissance\images\image-20220627163910703.png)
