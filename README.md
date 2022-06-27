@@ -1,32 +1,6 @@
-Common procedure
-=======
-1. find subdomain with amass
+# Put it altogether
 
-   ```sh
-   #!/bin/bash
-   amass enum -active -dir <output dir> -src -o <output filename> -d <main domain name> -blf <path to file providing blackisted domains>
-   ```
-
-   - extract hosts from amass-hosts-result
-
-     ```sh
-     #!/bin/bash
-     cat amass_output/amass.txt | cut -d']' -f 2 | awk '{print $1}' | sort -u > hosts-amass.txt
-     ```
-
-     
-
-2. Find valid active domain
-
-   ```sh
-   cat hosts-amass.txt | httpx -follow-redirects -ip -ports 80,443,8080,8081 -web-server -status-code -fc 400,404 -title -method -o httpx-hosts -x ALL
-   ```
-
-
-
-### Put it altogether
-
-#### For common recon
+### Amass + HTTPx
 
 Create new `.sh` file: 
 
@@ -145,7 +119,24 @@ amass viz -- Visualize enumeration results.
 amass track -- Track differences between enumerations.
 
 amass db -- Manipulate the Amass graph database.
-	
+
+### Common usages
+
+find subdomain with amass
+
+```sh
+#!/bin/bash
+amass enum -active -dir <output dir> -src -o <output filename> -d <main domain name> -blf <path to file providing blackisted domains>
+```
+
+extract hosts from amass-hosts-result
+
+```sh
+#!/bin/bash
+cat amass_output/amass.txt | cut -d']' -f 2 | awk '{print $1}' | sort -u > hosts-amass.txt
+```
+
+
 
 # dirsearch
 
@@ -185,7 +176,6 @@ echo $domain | httpx -follow-redirects -ip -ports 80,443,8080,8081 -web-server -
 
 > https://github.com/nullt3r/jfscan
 >
-> 
 
 The JFScan (Just Fu*king Scan) is a wrapper around a super-fast port scanner [**Masscan**](https://github.com/robertdavidgraham/masscan). Features:
 
