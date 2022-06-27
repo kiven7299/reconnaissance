@@ -215,11 +215,11 @@ nuclei [-l {path to file} | -u  -proxy {http or socks} -t {template}
 - `-l, -list string`    path to file containing a list of target URLs/hosts to scan (one per line)
 
 - `-t, -templates string[]`     list of template or template directory to run (comma-separated, file). Template is a `.yaml` file. 
-  - Templates is downloaded to `C:\Users\{User}\nuclei-templates` on Windows, and `/home/kali/.local/nuclei-templates` on Kali linux. Just specify relative path downloaded folder. For example: if we want to use template https://github.com/projectdiscovery/nuclei-templates/blob/2407b5777998e73192f0eda23cbbedc2afe1d58f/vulnerabilities/wordpress/wp-revslider-file-download.yaml, the option would be `-t "vulnerabilities/wordpress/wp-revslider-file-download.yaml"`
+  - Templates is downloaded to `C:\Users\{User}\nuclei-templates` on Windows, and `/home/kali/.local/nuclei-templates` on Kali linux. Just specify relative path from downloaded folder. For example: if we want to use template https://github.com/projectdiscovery/nuclei-templates/blob/2407b5777998e73192f0eda23cbbedc2afe1d58f/vulnerabilities/wordpress/wp-revslider-file-download.yaml, the option would be `-t "vulnerabilities/wordpress/wp-revslider-file-download.yaml"`
   - path to our `.yaml` file.
 
 
 
 Search templates in https://nuclei-templates.netlify.app/
 
-![image-20220627163910703](D:\Tools\Stuff\reconnaissance\images\image-20220627163910703.png)
+![image-20220627163910703](.\images\image-20220627163910703.png)
