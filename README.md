@@ -1,4 +1,4 @@
-common procedure
+Common procedure
 =======
 1. find subdomain with amass
 
@@ -51,11 +51,25 @@ cat "$domain/hosts-amass" | httpx -follow-redirects -ip -ports 80,443,8080,8081 
 
 nmap
 =======
-main path: /usr/share/nmap/
-scan openned service + find vulnerabilities
+- Root path: `/usr/share/nmap/`
+- Scan openned service + find vulnerabilities
 
-```powershell
-nmap --script vulners -sV [--script-args mincvss=<arg_val>] <hostname|IP: target>
+### Using with NSE (Nmap script engine)
+
+> https://nmap.org/book/man-nse.html
+
+```
+nmap --script {path to script file} [--script-args {...}] <hostname|IP: target>
+```
+
+- `-sC` = `--scrpit`: script file có đuôi `.nse`, nằm trong `{Root path}/scripts`
+
+
+
+Example using **Vulnscan** script (https://github.com/scipag/vulscan)
+
+```
+nmap -sV --script=vulscan/vulscan.nse [--script-args mincvss=8.0] <hostname|IP: target>
 ```
 
 
@@ -98,19 +112,20 @@ nmap --script vulners -sV [--script-args mincvss=<arg_val>] <hostname|IP: target
         3. or do not use proxychains at all but nmap's integrated options to use a SOCKS proxy.
     ```
   
-    
-  
-  
 
 
-### Usages
-
-Update `vulners` script at  https://github.com/vulnersCom/nmap-vulners
+### Common usages
 
 Common use for redteam /pentest
 
 ```powershell
 proxychains nmap -T4 -v -sS -sC -p- -oN <output file> <ip address range>
+```
+
+Suggest from **JFScan**
+
+```
+nmap -Pn -n -v yourTargetNetwork/26 -p- --min-parallelism 64 --min-rate 20000 --min-hostgroup 64 --randomize-hosts -sS -sV
 ```
 
 
@@ -137,6 +152,49 @@ amass db -- Manipulate the Amass graph database.
 common use
 
 ```powershell
-python dirsearch.py --header="Cookie: ..." -e sql,gz,bak,bk,php,txt,html,xml,asp,aspx,cgi,phtml,jsp,zip,rar,7z -r -R 3 --random-agents -b -t 5 --exclude-status=404,400
+python dirsearch.py --header="Cookie: ..." -e sql,gz,bak,bk,php,txt,html,xml,asp,aspx,cgi,phtml,jsp,zip,rar,7z -r -R 3 --random-agents -b -t 5 -x 404,400 --proxy "http://localhost:8080" -u "{URL}"
 ```
+
+
+
+# HTTPx
+
+> https://github.com/projectdiscovery/httpx
+
+Công dụng:
+
+- HTTP probe to check if domain is active
+
+### Common usage
+
+```
+echo $domain | httpx -follow-redirects -ip -ports 80,443,8080,8081 -web-server -status-code -fc 400,404 -title -method -x ALL -o "$domain - httpx_result" 
+```
+
+- `-ports`: những ports để check
+- `-fc`: không hiển thị kết quả nếu gặp các status code này
+- `-x`: Request methods
+- Specify những thông tin hiển thị trong kết quả:
+  - `-web-server`: tên webserver
+  - `-method`: method đã sử dụng
+  - `-title`: tiêu đề của web
+
+
+
+# JFScan
+
+> https://github.com/nullt3r/jfscan
+>
+> 
+
+The JFScan (Just Fu*king Scan) is a wrapper around a super-fast port scanner [**Masscan**](https://github.com/robertdavidgraham/masscan). Features:
+
+- Perform a large-scale scans using Nmap! Allows you to use Masscan to scan targets and execute Nmap on detected ports with custom settings. Nmap on steroids. *
+- Scans targets in variety of formats, including domain names!
+- Results can be produced in domain:port format.
+- It works in stdin/stdout mode, allowing you to stream results to/from other tools.
+- Auto-adjusts a packet rate for masscan so you don't have to (disable it by --disable-auto-rate).
+- Produces a standard Nmap XML report.
+- Fully supports IPv6.
+- Supports scope control, only targets defined in scope will be scanned.
 
