@@ -190,11 +190,9 @@ The JFScan (Just Fu*king Scan) is a wrapper around a super-fast port scanner [**
 
 ### common usage
 
+```bash
+jfscan --targets targets [--top-port 1000 | -p 1-65535] --nmap --nmap-options="-sV -sC -T4" --wait 5 --disable-auto-rate -r 2000 --nmap-output nmap.out -o jfscan.result
 ```
-jfscan --targets targets --top-port 1000 --nmap --nmap-options="-sV" 
-```
-
-
 
 # Nuclei
 
